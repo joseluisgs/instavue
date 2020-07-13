@@ -3,15 +3,10 @@
     <div class="container">
       <div class="card">
         <div class="card-content is-paddingless">
-          <div class="imagen"></div>
+          <div class="imagen" :style="{backgroundImage: `url(${entry.imagen})`}"></div>
           <div class="datos">
-            <p class="username is-size-7">Por @joseluisgs hace 20 minutos</p>
-            <p class="caption">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Possimus quisquam dignissimos ducimus libero,
-              atque praesentium, itaque hic voluptatem, tempore soluta
-              eum voluptas consectetur culpa debitis. Nostrum obcaecati in architecto non.
-            </p>
+            <p class="username is-size-7">Por {{ entry.username }} - {{ entry.cuando | timeAgo }}</p>
+            <p class="caption">{{ entry.descripcion }}</p>
           </div>
         </div>
         <footer class="card-footer">
@@ -19,7 +14,7 @@
             <a class="votar" href="#">
               <i class="fas fa-heart"></i>
             </a>
-            <span class="votos">0 votos</span>
+            <span class="votos">{{ entry.likes }} votos</span>
           </div>
         </footer>
       </div>
@@ -28,14 +23,29 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'EntryItem',
+  // Propiedades que nos llegan, objeto entrada y es requerido para renderizar
+  props: {
+    entry: {
+      type: Object,
+      required: true,
+    },
+  },
+  // filtros de datos
+  filters: {
+    timeAgo(timestamp) {
+      return moment.unix(timestamp).fromNow();
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .imagen {
-  background-image: url("../assets/blackcat.jpg");
+  // background-image: url("../assets/blackcat.jpg");
   background-size: cover;
   background-position: center;
   height: 45vmax;
