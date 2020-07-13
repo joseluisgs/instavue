@@ -29,6 +29,7 @@ const store = new Vuex.Store({
   // acciones y peticiones asíncronas
   // todas hacen mutaciones
   actions: {
+    // Obtiene el perfil de usuario
     async getUserProfile({ commit, state }) {
       try {
         // Buscamos los datos del usuario
@@ -38,6 +39,11 @@ const store = new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    // Limpia el estado
+    cleanUser({ commit }) {
+      commit('saveUser', null);
+      commit('saveUserProfile', {});
     },
   },
 });
