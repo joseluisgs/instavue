@@ -1,5 +1,5 @@
 # InstaVue
-Gestos de recursos de Vue hecho por Vue, con Bulma y Firebase
+Red social de fotografías realizado con Vue.js, con Bulma/Buefy y Firebase
 
 [![Vue Ready](https://img.shields.io/badge/Vue.js-%20Ready-%2342b983)](https://es.vuejs.org/)
 [![Bulma/Buefy](https://img.shields.io/badge/Bulma/Buefy-%20Ready-blueviolet)](https://buefy.org/)
@@ -8,7 +8,7 @@ Gestos de recursos de Vue hecho por Vue, con Bulma y Firebase
 [![Licence](https://img.shields.io/github/license/joseluisgs/NodeMonRest)](https://github.com/joseluisgs/NodeMonRest/blob/master/LICENSE)
 
 ## Acerca de
-App web de ejemplo con Vuejs, usando Bulma y Firebase
+Proyecto realizado con Vue.js, con Bulma/Buefy y Firebase
 
 ### Librerías
 Para el uso de Bulma podemos usar la librería por defecto o Buefy
@@ -42,7 +42,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 * [GitHub](https://github.com/joseluisgs) ![GitHub](https://img.shields.io/github/followers/joseluisgs?style=social)
 
-![GitHub](https://img.shields.io/github/last-commit/joseluisgs/vue3-tareas)
+![GitHub](https://img.shields.io/github/last-commit/joseluisgs/instavue)
 
 ## Licencia
 Este proyecto esta licenciado bajo licencia __MIT__, si desea saber más, visite el fichero [LICENSE](https://github.com/joseluisgs/notas-back-nem/blob/master/LICENSE) para su uso docente y educativo.
