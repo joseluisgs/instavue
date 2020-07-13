@@ -9,6 +9,9 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 
+// Importamos nuestro servicios de Firebase
+import Service from './services/Service';
+
 // importamos Buefy
 import 'buefy/dist/buefy.css';
 // Usamos Buefy
@@ -21,8 +24,14 @@ Vue.use(VueMoment, { moment });
 
 Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-}).$mount('#app');
+// Asegurarnos de que Firebase se carga ANTES que la instancia Vue.
+let app;
+Service.auth.onAuthStateChanged(() => {
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: (h) => h(App),
+    }).$mount('#app');
+  }
+});
