@@ -32,7 +32,6 @@ const routes = [
     path: '/recuperar',
     name: 'recuperar',
     component: Recuperar,
-    meta: { publico: true },
   },
 ];
 

@@ -3,7 +3,9 @@
     <div class="container">
       <div class="columns">
         <div class="column has-text-centered">
-          <img class="app-logo" src="@/assets/instavue.png" alt="INSTAVUE" />
+          <a href="" @click="goHome">
+            <img class="app-logo" src="@/assets/instavue.png" alt="INSTAVUE" />
+          </a>
         </div>
       </div>
     </div>
@@ -13,6 +15,13 @@
 <script>
 export default {
   name: 'AppHeader',
+  methods: {
+    goHome() {
+      if (this.$route.fullPath !== '/') {
+        this.$router.push({ name: 'portada' });
+      }
+    },
+  },
 };
 </script>
 
