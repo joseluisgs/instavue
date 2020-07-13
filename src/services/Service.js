@@ -11,7 +11,7 @@ import FirebaseConfig from './FirebaseConfig'; // Mejor para desplegar build
 // Ya lee las variables
 const firebaseConfig = FirebaseConfig;
 
-// Inicializar Firebase
+// Inicializar Firebase. Es opcional guardarlo en una constante, si lo hago es para imprimirlo
 const defaultProject = firebase.initializeApp(firebaseConfig);
 
 // Elementos de Firebase a usar (Cargamos los que vayamos a usar)
@@ -28,8 +28,8 @@ const entriesCollection = db.collection('entries');
 const usersCollection = db.collection('users');
 const likesCollection = db.collection('likes');
 
-// imprimimos el nombre del proyecto, esto espor depurar, luego quitar
-console.log(`⚑ Firebase -> ${defaultProject.name} ✓`); // "[DEFAULT]"console.log(defaultProject.name);  // "[DEFAULT]"
+// imprimimos el nombre del proyecto, esto espor depurar, luego quitar si se quiere
+console.log(`⚑ Firebase -> ${defaultProject.name} ✓`);
 
 // Exportamos lo que necesitemos
 export default {

@@ -1,14 +1,25 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import EntryList from '../views/EntryList.vue';
+import Registro from '../views/Registro.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '*',
+    redirect: '/',
+  },
+  {
     path: '/',
-    name: 'EntryList',
+    name: 'portada',
     component: EntryList,
+    alias: '/EntryList',
+  },
+  {
+    path: '/registro',
+    name: 'registro',
+    component: Registro,
   },
 ];
 
