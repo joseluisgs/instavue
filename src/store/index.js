@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 // Servicio Firebase
-// import Service from '../services/Service';
+import Service from '../services/Service';
 import UsuariosService from '../services/UsuariosService';
 
 Vue.use(Vuex);
@@ -46,6 +46,17 @@ const store = new Vuex.Store({
       commit('saveUserProfile', {});
     },
   },
+});
+
+// MANEJO EN TIEMPO REAL DE FIREBASE
+//  No perder la sesión si se recarga la página
+Service.auth.onAuthStateChanged((user) => {
+  if (user) {
+    // Almacenamos el usuario, mutacion
+    store.commit('saveUser', user);
+    // obtenemos el perfil de usuario, accion
+    store.dispatch('getUserProfile');
+  }
 });
 
 // Exportamos
