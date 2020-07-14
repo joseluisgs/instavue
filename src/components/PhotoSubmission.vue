@@ -55,6 +55,17 @@ export default {
         };
         // insertamos la entrada
         await EntradasService.post(nuevaEntrada);
+
+        // Movemos el scroll arriba suvemente
+        // Cuando todo esté recien pintado en el DOM
+        this.$nextTick(() => {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          });
+        });
+
         this.trabajando = false;
         this.alerta('Entrada añadida', 'is-success');
         // Cerramos
