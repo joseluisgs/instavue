@@ -14,7 +14,7 @@
           class="button is-success"
           :class="{'is-loading': trabajando}"
         >Guardar</button>
-        <button @click="cancelUpload" class="button">Cancelar</button>
+       <button :disabled="trabajando" @click="cancelUpload" class="button">Cancelar</button>
       </footer>
     </div>
   </div>

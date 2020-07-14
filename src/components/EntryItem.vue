@@ -3,10 +3,10 @@
     <div class="container">
       <div class="card">
         <div class="card-content is-paddingless">
-          <div class="imagen" :style="{backgroundImage: `url(${entry.imagen})`}"></div>
+          <div class="imagen" :style="{backgroundImage: `url(${entry.url})`}"></div>
           <div class="datos">
             <p class="username is-size-7">Por {{ entry.username }} - {{ entry.cuando | timeAgo }}</p>
-            <p class="caption">{{ entry.descripcion }}</p>
+            <p class="caption">{{ entry.caption }}</p>
           </div>
         </div>
         <footer class="card-footer">
@@ -37,7 +37,7 @@ export default {
   // filtros de datos
   filters: {
     timeAgo(timestamp) {
-      return moment.unix(timestamp).fromNow();
+      return moment(timestamp.toDate()).fromNow();
     },
   },
 };

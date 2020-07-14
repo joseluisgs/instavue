@@ -75,6 +75,18 @@ Service.auth.onAuthStateChanged((user) => {
     // obtenemos el perfil de usuario, accion
     store.dispatch('getUserProfile');
   }
+  // Recibimos el stream de fotos.
+  // No están protegidas, por eso van fuera del if
+  Service.entriesCollection.orderBy('cuando', 'desc').onSnapshot((querySnapshot) => {
+    const entries = [];
+    querySnapshot.forEach((doc) => {
+      const entry = doc.data();
+      entry.id = doc.id;
+      entries.push(entry);
+    });
+    // Lo asignamos al estado
+    store.commit('loadEntries', entries);
+  });
 });
 
 // Exportamos

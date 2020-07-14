@@ -10,9 +10,11 @@
             <!-- Al meter el icono dentro del label asociado al input
             y luego poner el inpit invisible simulamos el botón de carga de ficheros-->
             <input type="file" name="file" id="file" class="inputfile" @change="uploadFile" />
-            <label for="file">
+            <!-- Solo si esta identificado -->
+            <label v-if="user" for="file">
               <i class="fas fa-camera"></i>
             </label>
+            <i v-else @click="uploadFile" class="fas fa-camera"></i>
           </a>
         </div>
         <div class="logout column has-text-centered">
@@ -62,6 +64,14 @@ export default {
     },
     // Subimos el fichero
     uploadFile(event) {
+      // comprobamos que está identificado
+      // si no lo mandamos a login
+      if (!this.user) {
+        if (this.$route.name !== 'login') {
+          this.$router.push({ name: 'login' });
+        }
+        return;
+      }
       const { files } = event.target;
       if (!files.length) return;
       const reader = new FileReader();
