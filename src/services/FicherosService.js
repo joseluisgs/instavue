@@ -16,7 +16,7 @@ export default {
   async getURL(fileStorageRef) {
     return fileStorageRef.getDownloadURL();
   },
-  // Elimina una imagen
+  // Elimina una imagen -- > queda retocarlo
   delete(fileName) {
     return Storage.ref(fileName).delete();
   },

@@ -75,7 +75,6 @@ export default {
         const fileStorage = await FicherosService.upload(this.photoSubmission);
         // obtenemos su url
         const photoURL = await FicherosService.getURL(fileStorage.ref);
-        console.log(fileStorage.ref.name);
         // creamos la entrada
         const nuevaEntrada = {
           cuando: new Date(),

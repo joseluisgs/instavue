@@ -92,11 +92,13 @@ export default {
     async deletePhoto() {
       try {
         // Borramos la entrada...
-        await EntradasService.delete(this.entry.id);
-        // borramos los likes
+        const delEntry = EntradasService.delete(this.entry.id);
+        // borramos los likes, todos los likes de esta imagen
+        const delLike = LikesService.deleteAll(this.entry.id);
         // Borramos la imagen
-        await FicherosService.delete(this.entry.photoName);
-        // Hacer todo como una promesa global
+        const delPhoto = FicherosService.delete(this.entry.photoName);
+        // Si todo va bien, esperamos a toodas
+        await Promise.all([delEntry, delLike, delPhoto]);
         this.alerta('Entrada eliminada', 'is-success');
       } catch (error) {
         this.alerta(error, 'is-danger');
