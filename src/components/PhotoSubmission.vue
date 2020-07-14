@@ -6,7 +6,10 @@
         <p class="modal-card-title">Editar captura</p>
       </header>
       <section class="modal-card-body">
-        <img :src="photoSubmission" alt />
+        <!-- Imagen con filtro -->
+        <div :class="selectedFilter">
+          <img :src="photoSubmission" alt />
+        </div>
         <!-- Caption -->
         <div class="field">
           <div class="control">
@@ -18,6 +21,17 @@
               placeholder="Describe la foto que estas subiendo"
             />
           </div>
+        </div>
+         <!-- Filtro -->
+        <h4 class="subtitle">Selecciona filtro</h4>
+        <div class="select">
+          <select v-model="selectedFilter">
+            <option
+              v-for="filter in filters"
+              :value="filter.name"
+              :key="filters.indexOf(filter)"
+            >{{ filter.name }}</option>
+          </select>
         </div>
       </section>
       <footer class="modal-card-foot">
@@ -39,11 +53,16 @@ import EntradasService from '@/services/EntradasService';
 
 export default {
   name: 'PhotoSubmission',
+  // al crearme
+  created() {
+    this.selectedFilter = this.filters[0].name;
+  },
   data() {
     return {
       trabajando: false,
       downloadURL: '',
       caption: '',
+      selectedFilter: '',
     };
   },
   methods: {
@@ -60,7 +79,7 @@ export default {
         const nuevaEntrada = {
           cuando: new Date(),
           caption: this.caption,
-          filtro: '',
+          filtro: this.selectedFilter,
           url: photoURL,
           likes: 0,
           userId: this.user.uid,
@@ -102,8 +121,9 @@ export default {
       });
     },
   },
+  // Propiedades de Vuex
   computed: {
-    ...mapState(['photoSubmission', 'user', 'userProfile']),
+    ...mapState(['photoSubmission', 'user', 'userProfile', 'filters']),
   },
 };
 </script>
