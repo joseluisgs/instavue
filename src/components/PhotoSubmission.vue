@@ -8,7 +8,7 @@
       <section class="modal-card-body">
         <!-- Imagen con filtro -->
         <div :class="selectedFilter">
-          <img :src="photoSubmission" alt />
+          <img class="submittedImage" :src="photoSubmission" />
         </div>
         <!-- Caption -->
         <div class="field">
@@ -137,5 +137,9 @@ export default {
     width: 90%;
     height: 90%;
   }
+}
+.submittedImage {
+  width: 100%;
+  height: auto;
 }
 </style>

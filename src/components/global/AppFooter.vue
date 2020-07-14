@@ -1,21 +1,33 @@
 <template>
   <section class="section">
     <div class="container">
+      <!-- Zona para ver la foto -->
+      <div v-show="streaming" id="stream-container" class="has-text-centered">
+        <hr />
+        <div id="stream"></div>
+        <hr />
+        <a href="#" @click="snapPhoto">
+          <i class="fas fa-dot-circle"></i>
+        </a>
+        <br>
+          <a href="#" @click="cancelPhoto">Cancelar</a>
+        <hr />
+      </div>
       <div class="columns is-mobile">
         <div class="column">
           <!-- Aquí irá el botón del perfil -->
         </div>
-        <div class="column has-text-centered">
-          <a href="#">
+        <div class="capture column has-text-centered">
+           <!-- Capturar foto -->
+          <i @click="capturePhoto" class="fas fa-camera"></i>
             <!-- Al meter el icono dentro del label asociado al input
             y luego poner el inpit invisible simulamos el botón de carga de ficheros-->
             <input type="file" name="file" id="file" class="inputfile" @change="uploadFile" />
             <!-- Solo si esta identificado -->
             <label v-if="user" for="file">
-              <i class="fas fa-camera"></i>
+              <i class="fas fa-file-image"></i>
             </label>
             <i v-else @click="uploadFile" class="fas fa-camera"></i>
-          </a>
         </div>
         <div class="logout column has-text-centered">
           <a v-if="user" href="#" @click="cerrarSesion">
@@ -42,10 +54,17 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'AppFooter',
+  // Modelo de datos
+  data() {
+    return {
+      streaming: false,
+    };
+  },
   methods: {
     // Metodos de Vuex
     // ...mapMutations(['assingSubmission', 'setSubmitting']),
     ...mapActions(['cleanUser', 'uploadPhoto']),
+    // Cerrar sesión
     async cerrarSesion() {
       // Por si hay que hacer algo en el servidor.
       try {
@@ -87,6 +106,43 @@ export default {
       // Lo limpiamos
       document.querySelector('#file').value = '';
     },
+    // capturamos foto
+    capturePhoto() {
+      // Si estamos logueados
+      if (!this.user) {
+        if (this.$route.name !== 'login') {
+          this.$router.push({ name: 'login' });
+        }
+        return;
+      }
+
+      this.streaming = true;
+
+      // WebcamJS, indicamos la calidad
+      setTimeout(() => {
+        window.Webcam.set({
+          image_format: 'jpeg',
+          width: 320,
+          height: 240,
+          jpeg_quality: 90,
+        });
+        // Lo acoplamos en streamo
+        window.Webcam.attach('#stream');
+      }, 500);
+    },
+    // Toma la foto
+    snapPhoto() {
+      // Los datos vienen en ur base64
+      window.Webcam.snap((data) => {
+        this.uploadPhoto(data);
+        this.cancelPhoto();
+      });
+    },
+    // Cancela la foto
+    cancelPhoto() {
+      this.streaming = false;
+      window.Webcam.reset();
+    },
     // alerta
     alerta(mensaje, tipo) {
       this.$buefy.notification.open({
@@ -117,6 +173,19 @@ i {
 
 #file {
   display: none;
+}
+
+#stream {
+  margin: 0 auto;
+}
+
+.capture i {
+  color: #3273dc;
+  cursor: pointer;
+  margin: 0 10px;
+  &:last-of-type {
+    font-size: 40px;
+  }
 }
 
 .logout {
