@@ -14,14 +14,14 @@
           class="button is-success"
           :class="{'is-loading': trabajando}"
         >Guardar</button>
-        <button class="button">Cancelar</button>
+        <button @click="cancelUpload" class="button">Cancelar</button>
       </footer>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'PhotoSubmission',
@@ -32,8 +32,15 @@ export default {
     };
   },
   methods: {
+    // Metodos de Vuex
+    ...mapActions(['cancelSubmission']),
     async submitPhoto() {
       console.log('Guardando imagen...');
+    },
+    cancelUpload() {
+      // Como lo ponemos el estado en false en Vuex
+      // de submitting se cierra la ventana :)
+      this.cancelSubmission();
     },
   },
   computed: {

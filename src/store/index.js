@@ -54,9 +54,14 @@ const store = new Vuex.Store({
       commit('saveUserProfile', {});
     },
     // Sube un fichero
-    async uploadPhoto({ commit }, file) {
+    uploadPhoto({ commit }, file) {
       commit('assingSubmission', file);
       commit('setSubmitting', true);
+    },
+    // Cancela la subida
+    cancelSubmission({ commit }) {
+      commit('setSubmitting', false);
+      commit('assingSubmission', null);
     },
   },
 });
