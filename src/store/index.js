@@ -12,6 +12,8 @@ const store = new Vuex.Store({
     entries: null,
     user: null,
     userProfile: {},
+    photoSubmission: null,
+    submitting: false,
   },
   // Mutaciones de nuestro estado
   // Son las únicas encargadas de mutar el estado
@@ -24,6 +26,12 @@ const store = new Vuex.Store({
     },
     saveUserProfile(state, val) {
       state.userProfile = val;
+    },
+    assingSubmission(state, val) {
+      state.photoSubmission = val;
+    },
+    setSubmitting(state, val) {
+      state.submitting = val;
     },
   },
   // acciones y peticiones asíncronas
@@ -44,6 +52,11 @@ const store = new Vuex.Store({
     cleanUser({ commit }) {
       commit('saveUser', null);
       commit('saveUserProfile', {});
+    },
+    // Sube un fichero
+    async uploadFile({ commit }, file) {
+      commit('assingSubmission', file);
+      commit('setSubmitting', true);
     },
   },
 });
