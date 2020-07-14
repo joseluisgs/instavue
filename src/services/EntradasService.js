@@ -38,4 +38,8 @@ export default {
     const res = await Service.entriesCollection.add(data);
     return res;
   },
+  // Actualiza una entrada
+  async put(id, data) {
+    return Service.entriesCollection.doc(id).update(data);
+  },
 };
