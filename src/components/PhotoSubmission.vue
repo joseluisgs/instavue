@@ -22,6 +22,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import FilesService from '@/services/FilesService';
 
 export default {
   name: 'PhotoSubmission',
@@ -35,12 +36,31 @@ export default {
     // Metodos de Vuex
     ...mapActions(['cancelSubmission']),
     async submitPhoto() {
-      console.log('Guardando imagen...');
+      try {
+        this.trabajando = true;
+        // subimos la foto
+        const fileStorage = await FilesService.upload(this.photoSubmission);
+        const photoURL = await FilesService.getURL(fileStorage.ref);
+        this.trabajando = false;
+        console.log(photoURL);
+        this.alerta('Fichero subido', 'is-success');
+      } catch (error) {
+        this.alerta(error, 'is-danger');
+      } finally {
+        this.trabajando = false;
+      }
     },
     cancelUpload() {
       // Como lo ponemos el estado en false en Vuex
       // de submitting se cierra la ventana :)
       this.cancelSubmission();
+    },
+    // alerta
+    alerta(mensaje, tipo) {
+      this.$buefy.notification.open({
+        message: `${mensaje}`,
+        type: `${tipo}`,
+      });
     },
   },
   computed: {

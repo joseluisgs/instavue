@@ -34,6 +34,7 @@
 
 <script>
 import AuthService from '@/services/AuthService';
+
 // Vuex
 import { mapState, mapActions } from 'vuex';
 
@@ -64,12 +65,13 @@ export default {
       const { files } = event.target;
       if (!files.length) return;
       const reader = new FileReader();
-      reader.readAsDataURL(files[0]);
+      reader.readAsDataURL(files[0]); // Solo es un fichero
 
       reader.onload = (data) => {
         // this.assingSubmission(data.target.result);
         // this.setSubmitting(true);
         // Lo hago con una acción para englobar las dos mutaciones
+        // Obtiene el fichero en Base64
         this.uploadPhoto(data.target.result);
       };
       // Lo limpiamos
