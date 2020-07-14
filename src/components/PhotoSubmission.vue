@@ -22,7 +22,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import FilesService from '@/services/FilesService';
+import FicherosService from '@/services/FicherosService';
+import EntradasService from '@/services/EntradasService';
 
 export default {
   name: 'PhotoSubmission',
@@ -39,11 +40,25 @@ export default {
       try {
         this.trabajando = true;
         // subimos la foto
-        const fileStorage = await FilesService.upload(this.photoSubmission);
-        const photoURL = await FilesService.getURL(fileStorage.ref);
+        const fileStorage = await FicherosService.upload(this.photoSubmission);
+        // obtenemos su url
+        const photoURL = await FicherosService.getURL(fileStorage.ref);
+        // creamos la entrada
+        const nuevaEntrada = {
+          cuando: new Date(),
+          caption: '',
+          filtro: '',
+          url: photoURL,
+          likes: 0,
+          userId: this.user.uid,
+          username: `${this.userProfile.nombre} ${this.userProfile.apellidos}`,
+        };
+        // insertamos la entrada
+        await EntradasService.post(nuevaEntrada);
         this.trabajando = false;
-        console.log(photoURL);
-        this.alerta('Fichero subido', 'is-success');
+        this.alerta('Entrada añadida', 'is-success');
+        // Cerramos
+        this.cancelSubmission();
       } catch (error) {
         this.alerta(error, 'is-danger');
       } finally {
@@ -64,7 +79,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['photoSubmission']),
+    ...mapState(['photoSubmission', 'user', 'userProfile']),
   },
 };
 </script>

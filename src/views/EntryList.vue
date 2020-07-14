@@ -2,7 +2,7 @@
   <section class="section">
     <PhotoSubmission v-if="submitting" />
     <div class="container">
-      <EntryItem v-for="entrada in EntradasService"
+      <EntryItem v-for="entrada in entradas"
         :entry="entrada"
         :key="entrada.cuando" />
     </div>
@@ -21,10 +21,14 @@ export default {
     EntryItem,
     PhotoSubmission,
   },
+  // Al crearme, consigo las entradas... por ahora...
+  async created() {
+    this.entradas = await EntradasService.getAll();
+  },
   // Modelo de datos
   data() {
     return {
-      EntradasService,
+      entradas: [],
     };
   },
   computed: {
