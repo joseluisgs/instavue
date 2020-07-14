@@ -9,7 +9,7 @@
           <a href="#">
             <!-- Al meter el icono dentro del label asociado al input
             y luego poner el inpit invisible simulamos el botón de carga de ficheros-->
-            <input type="file" name="file" id="file" class="inputfile" @change="subirFichero" />
+            <input type="file" name="file" id="file" class="inputfile" @change="uploadFile" />
             <label for="file">
               <i class="fas fa-camera"></i>
             </label>
@@ -42,7 +42,7 @@ export default {
   methods: {
     // Metodos de Vuex
     // ...mapMutations(['assingSubmission', 'setSubmitting']),
-    ...mapActions(['cleanUser', 'uploadFile']),
+    ...mapActions(['cleanUser', 'uploadPhoto']),
     async cerrarSesion() {
       // Por si hay que hacer algo en el servidor.
       try {
@@ -60,7 +60,7 @@ export default {
       }
     },
     // Subimos el fichero
-    subirFichero(event) {
+    uploadFile(event) {
       const { files } = event.target;
       if (!files.length) return;
       const reader = new FileReader();
@@ -70,7 +70,7 @@ export default {
         // this.assingSubmission(data.target.result);
         // this.setSubmitting(true);
         // Lo hago con una acción para englobar las dos mutaciones
-        this.uploadFile(data.target.result);
+        this.uploadPhoto(data.target.result);
       };
       // Lo limpiamos
       document.querySelector('#file').value = '';

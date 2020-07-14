@@ -1,5 +1,6 @@
 <template>
   <section class="section">
+    <PhotoSubmission v-if="submitting" />
     <div class="container">
       <EntryItem v-for="entrada in EntradasService"
         :entry="entrada"
@@ -11,17 +12,24 @@
 <script>
 import EntryItem from '@/components/EntryItem.vue';
 import EntradasService from '@/services/EntradasService';
+import PhotoSubmission from '@/components/PhotoSubmission.vue';
+import { mapState } from 'vuex';
 
 export default {
   name: 'EntryList',
   components: {
     EntryItem,
+    PhotoSubmission,
   },
   // Modelo de datos
   data() {
     return {
       EntradasService,
     };
+  },
+  computed: {
+    // Campos de Vuex
+    ...mapState(['submitting']),
   },
 };
 </script>
