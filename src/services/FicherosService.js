@@ -2,6 +2,7 @@ import Service from './Service';
 
 // Recurso
 const Storage = Service.storage;
+
 // Operaciones
 export default {
   // Sube un fichero en base 64, data_url
@@ -14,5 +15,9 @@ export default {
   // devuelve el url del fichero
   async getURL(fileStorageRef) {
     return fileStorageRef.getDownloadURL();
+  },
+  // Elimina una imagen
+  delete(fileName) {
+    return Storage.ref(fileName).delete();
   },
 };

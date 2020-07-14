@@ -17,6 +17,10 @@
             </a>
             <span class="votos">{{ entry.likes }} votos</span>
           </div>
+          <!-- Borrar foto -->
+          <div v-if="photoOwned" class="card-footer-item">
+            <a @click.prevent="deletePhoto" href="#">Eliminar</a>
+          </div>
         </footer>
       </div>
     </div>
@@ -27,6 +31,7 @@
 import moment from 'moment';
 import LikesService from '@/services/LikesService';
 import EntradasService from '@/services/EntradasService';
+import FicherosService from '@/services/FicherosService';
 import { mapState } from 'vuex';
 
 export default {
@@ -82,6 +87,21 @@ export default {
       this.liked = true;
       this.alerta('Like contabilizado', 'is-success');
     },
+    // Eliminamos la foto
+    // no está completo, se debería borrar los likes y el fichero ;)
+    async deletePhoto() {
+      try {
+        // Borramos la entrada...
+        await EntradasService.delete(this.entry.id);
+        // borramos los likes
+        // Borramos la imagen
+        await FicherosService.delete(this.entry.photoName);
+        // Hacer todo como una promesa global
+        this.alerta('Entrada eliminada', 'is-success');
+      } catch (error) {
+        this.alerta(error, 'is-danger');
+      }
+    },
     // alerta
     alerta(mensaje, tipo) {
       this.$buefy.notification.open({
@@ -96,9 +116,15 @@ export default {
       return moment(timestamp.toDate()).fromNow();
     },
   },
-  // Propiedades de Vuex
   computed: {
+    // Propiedades de Vuex
     ...mapState(['user']),
+    // Mis métodos computados
+    // Si la foto es mía
+    photoOwned() {
+      if (!this.user) return false;
+      return this.user.uid === this.entry.userId;
+    },
   },
 };
 </script>

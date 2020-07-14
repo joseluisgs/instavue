@@ -42,4 +42,8 @@ export default {
   async put(id, data) {
     return Service.entriesCollection.doc(id).update(data);
   },
+  // elimina una entrada
+  async delete(id) {
+    return Service.entriesCollection.doc(id).delete();
+  },
 };

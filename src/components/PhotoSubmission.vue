@@ -75,12 +75,14 @@ export default {
         const fileStorage = await FicherosService.upload(this.photoSubmission);
         // obtenemos su url
         const photoURL = await FicherosService.getURL(fileStorage.ref);
+        console.log(fileStorage.ref.name);
         // creamos la entrada
         const nuevaEntrada = {
           cuando: new Date(),
           caption: this.caption,
           filtro: this.selectedFilter,
           url: photoURL,
+          photoName: fileStorage.ref.name,
           likes: 0,
           userId: this.user.uid,
           username: `${this.userProfile.nombre} ${this.userProfile.apellidos}`,
