@@ -1,4 +1,5 @@
 // Servidor para procesar la distribución een proyectos estáticos
+// Especialmente pensado si lo publicas en Heroku o similares, si es e Firebase no es necesario
 // por si no tenemos un servidor listo, lo creamos con Node.js/Express
 // y servimos el documento de distribución
 const express = require('express');
