@@ -22,7 +22,7 @@
         </div>
         <div class="capture column has-text-centered">
            <!-- Capturar foto -->
-          <i @click="capturePhoto" class="fas fa-camera"></i>
+          <i v-if="user" @click="capturePhoto" class="fas fa-camera"></i>
             <!-- Al meter el icono dentro del label asociado al input
             y luego poner el inpit invisible simulamos el botón de carga de ficheros-->
             <input type="file" name="file" id="file" class="inputfile" @change="uploadFile" />
