@@ -14,8 +14,11 @@
         <hr />
       </div>
       <div class="columns is-mobile">
-        <div class="column">
-          <!-- Aquí irá el botón del perfil -->
+        <!-- Perfil -->
+        <div class="profile column has-text-centered">
+          <a href="#" @click="openProfile">
+            <i class="fas fa-user"></i>
+          </a>
         </div>
         <div class="capture column has-text-centered">
            <!-- Capturar foto -->
@@ -143,6 +146,10 @@ export default {
       this.streaming = false;
       window.Webcam.reset();
     },
+    // Abrir perfil
+    openProfile() {
+      this.$router.push({ name: 'perfil' });
+    },
     // alerta
     alerta(mensaje, tipo) {
       this.$buefy.notification.open({
@@ -168,7 +175,7 @@ section {
 }
 
 i {
-  font-size: 50px;
+  font-size: 40px;
 }
 
 #file {
@@ -189,6 +196,15 @@ i {
 }
 
 .logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  i {
+    font-size: 40px;
+    color: #999999;
+  }
+}
+.profile {
   display: flex;
   align-items: center;
   justify-content: center;
