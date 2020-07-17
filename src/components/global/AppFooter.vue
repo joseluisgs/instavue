@@ -175,7 +175,7 @@ section {
 }
 
 i {
-  font-size: 40px;
+  font-size: 30px;
 }
 
 #file {
@@ -191,7 +191,7 @@ i {
   cursor: pointer;
   margin: 0 10px;
   &:last-of-type {
-    font-size: 40px;
+    font-size: 30px;
   }
 }
 
@@ -200,7 +200,7 @@ i {
   align-items: center;
   justify-content: center;
   i {
-    font-size: 40px;
+    font-size: 30px;
     color: #999999;
   }
 }
@@ -209,7 +209,7 @@ i {
   align-items: center;
   justify-content: center;
   i {
-    font-size: 40px;
+    font-size: 30px;
     color: #999999;
   }
 }

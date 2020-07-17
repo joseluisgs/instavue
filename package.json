@@ -7,10 +7,15 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "clean": "rm -rf node_modules && npm run undist",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
     "reinstall": "npm run clean && npm run undist && npm install",
-    "undist": "rm -rf dist",
-    "start": "node server.js"
+    "start": "node server.js",
+    "undist": "rm -rf dist"
   },
+  "main": "background.js",
   "dependencies": {
     "buefy": "^0.8.20",
     "connect-history-api-fallback": "^1.6.0",
@@ -34,11 +39,14 @@
     "@vue/cli-service": "~4.4.0",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "babel-eslint": "^10.1.0",
+    "electron": "^9.0.0",
+    "electron-devtools-installer": "^3.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
+    "vue-cli-plugin-electron-builder": "~2.0.0-rc.4",
     "vue-template-compiler": "^2.6.11"
   }
 }
