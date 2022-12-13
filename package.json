@@ -20,7 +20,7 @@
     "buefy": "^0.8.20",
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "firebase": "^7.16.0",
     "moment": "^2.27.0",
     "register-service-worker": "^1.7.1",
